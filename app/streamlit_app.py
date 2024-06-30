@@ -2,243 +2,69 @@ import streamlit as st
 from docs.resume import display_resume_pdf
 from docs.biography import intro
 from docs.projects import projects
-from interactive_models import interactive_models
+from interactive.interactive_models import i_models
+from interactive.pretrained_models import pretrained_models
 
 
 def intro_page():
-    import streamlit as st
 
     st.write("# Hi All! Welcome to My Project, Classification of Dwarf and Giant Stars! 🌌🌟🪐")
     st.sidebar.success("Please select a Page View.")
 
     st.markdown(
         """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
+        This project attempts to perform a Classification of Giant stars, Dwarf Stars, and group
+        other stars into an 'Other' Category.
 
-        **👈 Select a demo from the dropdown on the left** to see some examples
-        of what Streamlit can do!
+        You will see the impacts of broadly classifying categories vs narrowing the scope of classification
+        and the impact on performance of the model. The following Classification models will 
+        be tested:
+                                1. Decision Trees
+                                2. Random Forest
+                                3. K Nearest Neighbors
 
-        ### Want to learn more?
+        Giant and Dwarfs are the few of various star categories that describe the evolutionary status 
+        of a star. These stars have distinct characteristics and differ greatly from one another. 
+        These are stars that belong on the Main Sequence of stars, which are stars that fuse hydrogen to helium 
+        at its core. Main Sequence Stars are predictable in their evolutionary status - stars 
+        above a certain threshold will grow into Giant stars, while others below the threshold will 
+        become dwarfs. 
 
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-
-        ### See more complex demos
-
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+        Below is a diagram of an H-R Diagram. This describes main sequence stars and their
+        evolutionary status.
+	
     """
     )
 
-# def mapping_demo():
-#     import streamlit as st
-#     import pandas as pd
-#     import pydeck as pdk
+    st.image('app/docs/hrdiagram1.jpg', caption='Hertzsprung-Russell Diagram', use_column_width=True)
 
-#     from urllib.error import URLError
-
-#     st.markdown(f"# {list(page_names_to_funcs.keys())[2]}")
-#     st.write(
-#         """
-#         This demo shows how to use
-# [`st.pydeck_chart`](https://docs.streamlit.io/develop/api-reference/charts/st.pydeck_chart)
-# to display geospatial data.
-# """
-#     )
-
-#     @st.cache_data
-#     def from_data_file(filename):
-#         url = (
-#             "http://raw.githubusercontent.com/streamlit/"
-#             "example-data/master/hello/v1/%s" % filename
-#         )
-#         return pd.read_json(url)
-
-#     try:
-#         ALL_LAYERS = {
-#             "Bike Rentals": pdk.Layer(
-#                 "HexagonLayer",
-#                 data=from_data_file("bike_rental_stats.json"),
-#                 get_position=["lon", "lat"],
-#                 radius=200,
-#                 elevation_scale=4,
-#                 elevation_range=[0, 1000],
-#                 extruded=True,
-#             ),
-#             "Bart Stop Exits": pdk.Layer(
-#                 "ScatterplotLayer",
-#                 data=from_data_file("bart_stop_stats.json"),
-#                 get_position=["lon", "lat"],
-#                 get_color=[200, 30, 0, 160],
-#                 get_radius="[exits]",
-#                 radius_scale=0.05,
-#             ),
-#             "Bart Stop Names": pdk.Layer(
-#                 "TextLayer",
-#                 data=from_data_file("bart_stop_stats.json"),
-#                 get_position=["lon", "lat"],
-#                 get_text="name",
-#                 get_color=[0, 0, 0, 200],
-#                 get_size=15,
-#                 get_alignment_baseline="'bottom'",
-#             ),
-#             "Outbound Flow": pdk.Layer(
-#                 "ArcLayer",
-#                 data=from_data_file("bart_path_stats.json"),
-#                 get_source_position=["lon", "lat"],
-#                 get_target_position=["lon2", "lat2"],
-#                 get_source_color=[200, 30, 0, 160],
-#                 get_target_color=[200, 30, 0, 160],
-#                 auto_highlight=True,
-#                 width_scale=0.0001,
-#                 get_width="outbound",
-#                 width_min_pixels=3,
-#                 width_max_pixels=30,
-#             ),
-#         }
-#         st.sidebar.markdown("### Map Layers")
-#         selected_layers = [
-#             layer
-#             for layer_name, layer in ALL_LAYERS.items()
-#             if st.sidebar.checkbox(layer_name, True)
-#         ]
-#         if selected_layers:
-#             st.pydeck_chart(
-#                 pdk.Deck(
-#                     map_style="mapbox://styles/mapbox/light-v9",
-#                     initial_view_state={
-#                         "latitude": 37.76,
-#                         "longitude": -122.4,
-#                         "zoom": 11,
-#                         "pitch": 50,
-#                     },
-#                     layers=selected_layers,
-#                 )
-#             )
-#         else:
-#             st.error("Please choose at least one layer above.")
-#     except URLError as e:
-#         st.error(
-#             """
-#             **This demo requires internet access.**
-
-#             Connection error: %s
-#         """
-#             % e.reason
-#         )
-
-# def plotting_demo():
-#     import streamlit as st
-#     import time
-#     import numpy as np
-
-#     st.markdown(f'# {list(page_names_to_funcs.keys())[1]}')
-#     st.write(
-#         """
-#         This demo illustrates a combination of plotting and animation with
-# Streamlit. We're generating a bunch of random numbers in a loop for around
-# 5 seconds. Enjoy!
-# """
-#     )
-
-#     progress_bar = st.sidebar.progress(0)
-#     status_text = st.sidebar.empty()
-#     last_rows = np.random.randn(1, 1)
-#     chart = st.line_chart(last_rows)
-
-#     for i in range(1, 101):
-#         new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-#         status_text.text("%i%% Complete" % i)
-#         chart.add_rows(new_rows)
-#         progress_bar.progress(i)
-#         last_rows = new_rows
-#         time.sleep(0.05)
-
-#     progress_bar.empty()
-
-#     # Streamlit widgets automatically run the script from top to bottom. Since
-#     # this button is not connected to any other logic, it just causes a plain
-#     # rerun.
-#     st.button("Re-run")
+    st.markdown(
+        """
+        The scope of the project is to try to properly classify the dataset into the categories of 
+        1. Giant Stars 2. Dwarf stars and 3. Other stars. Doing so will validate that based on the 
+        metrics of brightness (Absolute Magnitude) and Color (B-V Index) we can systematically 
+        categorize these stars into their respective evolutionary status. This will also allow 
+        us to ultimately determine the death of these stars. 
 
 
-# def data_frame_demo():
-#     import streamlit as st
-#     import pandas as pd
-#     import altair as alt
-
-#     from urllib.error import URLError
-
-#     st.markdown(f"# {list(page_names_to_funcs.keys())[3]}")
-#     st.write(
-#         """
-#         This demo shows how to use `st.write` to visualize Pandas DataFrames.
-
-# (Data courtesy of the [UN Data Explorer](http://data.un.org/Explorer.aspx).)
-# """
-#     )
+          The fundamental goals of this project is to the final the optimal model with an accuracy of over 80%. 
+          The impacts of the models performance will be discussed and the optimal model will be 
+          chosen.
+    """
+    )
 
 def resume():
     """Function to call display_resume_pdf(file)"""
     return display_resume_pdf('app/docs/Resume.pdf')
 
-
-#     @st.cache_data
-#     def get_UN_data():
-#         AWS_BUCKET_URL = "http://streamlit-demo-data.s3-us-west-2.amazonaws.com"
-#         df = pd.read_csv(AWS_BUCKET_URL + "/agri.csv.gz")
-#         return df.set_index("Region")
-
-#     try:
-#         df = get_UN_data()
-#         countries = st.multiselect(
-#             "Choose countries", list(df.index), ["China", "United States of America"]
-#         )
-#         if not countries:
-#             st.error("Please select at least one country.")
-#         else:
-#             data = df.loc[countries]
-#             data /= 1000000.0
-#             st.write("### Gross Agricultural Production ($B)", data.sort_index())
-
-#             data = data.T.reset_index()
-#             data = pd.melt(data, id_vars=["index"]).rename(
-#                 columns={"index": "year", "value": "Gross Agricultural Product ($B)"}
-#             )
-#             chart = (
-#                 alt.Chart(data)
-#                 .mark_area(opacity=0.3)
-#                 .encode(
-#                     x="year:T",
-#                     y=alt.Y("Gross Agricultural Product ($B):Q", stack=None),
-#                     color="Region:N",
-#                 )
-#             )
-#             st.altair_chart(chart, use_container_width=True)
-#     except URLError as e:
-#         st.error(
-#             """
-#             **This demo requires internet access.**
-
-#             Connection error: %s
-#         """
-#             % e.reason
-#         )
-page_names_to_funcs = {
+pages = {
     "Introduction": intro_page,
-    # "Plotting Demo": plotting_demo,
-    # "Mapping Demo": mapping_demo,
-    # "DataFrame Demo": data_frame_demo,
     "Biography": intro,
     'Resume': resume,
-    'Projects': projects
-    # 'Pre-trained models': 'pretrained_models',
-    # 'Interactive Models': interactive_models
+    'Projects': projects,
+    'Pre-trained models': pretrained_models,
+    'Interactive Models': i_models
 }
 
-demo_name = st.sidebar.selectbox("Choose a page", page_names_to_funcs.keys(), index=0)
-page_names_to_funcs[demo_name]()
+page_title = st.sidebar.selectbox("Choose a page", pages.keys(), index=0)
+pages[page_title]()

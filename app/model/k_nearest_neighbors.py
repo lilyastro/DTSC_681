@@ -1,5 +1,4 @@
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
 
 class KNeighbors:
     def __init__(self, n_neighbors=5, metric='euclidean', weights=None):

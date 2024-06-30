@@ -4,7 +4,7 @@ from sklearn.model_selection import GridSearchCV
 
 class PerformanceData:
     """A Class that returns the grid search and accuracy for a respective model for White and Giant Dwarf classification.
-    This is a prepartory """
+    This is a preparatory. """
     
     def __init__(self): 
         return
@@ -18,7 +18,7 @@ class PerformanceData:
         - param_grid: Dictionary of hyperparameters.
         - X_train: Training input samples.
         - y_train: Target values for X_train.
-        - cv: Cross-validation strategy. Default is 5-fold cross-validation.
+        - cv: Cross-validation strategy. Default is 5.
 
         Returns:
         - best_params: Best hyperparameters found during grid search.
@@ -35,15 +35,20 @@ class PerformanceData:
         # Return the best parameters found.
         return grid_search.best_params_
     
-    def get_performance_metrics(self, model, y_test, y_pred):
+    def get_performance_metrics(self, model, y_test, y_pred, binary=False):
         acc = accuracy_score(y_test, y_pred)
-        f1 = f1_score(y_test, y_pred, average=None) # for non binary classification
-        prec = precision_score(y_test, y_pred, average='micro') # Calculate metrics globally 
-        recall = recall_score(y_test, y_pred, average='micro') # Calculate metrics globally 
-        performance_dict = {f' {model} F1 Score': f1,
-            f' {model} Accuracy Score': acc,
-            f' {model} Precision': prec,
-            f' {model} Recal;': recall,
+        if binary:
+            f1 = f1_score(y_test, y_pred, average='binary') # for non binary classification
+            prec = precision_score(y_test, y_pred, average='binary') # Calculate metrics globally 
+            recall = recall_score(y_test, y_pred, average='binary') # Calculate metrics globally 
+        else:
+            f1 = f1_score(y_test, y_pred, average=None) # for non binary classification
+            prec = precision_score(y_test, y_pred, average='micro') # Calculate metrics globally 
+            recall = recall_score(y_test, y_pred, average='micro') # Calculate metrics globally 
+        performance_dict = {f'F1 Score': f1,
+            f'Accuracy': acc,
+            f'Precision': prec,
+            f'Recall': recall,
             }
             
         return performance_dict

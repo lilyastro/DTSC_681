@@ -2,4 +2,4 @@ venv/*
 venv
 /venv
 /venv/*
-app/docs/__pycache__/*
+*__pycache__*

@@ -1,7 +1,6 @@
 from multiprocessing.dummy import Array
 import pandas as pd
 import numpy as np
-from sklearn.utils import resample
 
 
 
@@ -76,7 +75,7 @@ class CleanData:
     def drop_outlier_plx(self):
         """
         Function to drop outlier e_Plx from a dataframe.
-        The definition is an outlier is 2 standard deviations away from the median.
+        The definition is an outlier is 3 standard deviations away from the mean.
         Args: DataFrame
         Returns: DataFrame 
         """
@@ -84,7 +83,7 @@ class CleanData:
         mean = self.df['e_Plx'].mean()
         std = self.df['e_Plx'].std()
         
-        threshold = mean + (2 * std)
+        threshold = mean + (3 * std)
 
         self.df = self.df[self.df['e_Plx'] < threshold]
         

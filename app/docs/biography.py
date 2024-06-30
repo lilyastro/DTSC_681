@@ -1,9 +1,10 @@
 def intro():
     import streamlit as st
 
-    st.write("Hi Everyone, I'm Lily! 👋")
+    st.title("Hi Everyone, I'm Lily! 👋")
 
     
+    st.title("Introduction")
 
     st.markdown(
         """
@@ -15,6 +16,9 @@ def intro():
 
     st.image('app/docs/grad_pic.jpeg', caption='Graduation!', use_column_width=True)
 
+
+    st.title("Professsional Background")
+
     st.markdown(
         """
         I currently work at a digital marketing agency as a Data Engineer. Upon my graduation, I am transitioning into a Machine
@@ -24,3 +28,16 @@ def intro():
         I started doing Lagree (a form of Pilates) about 6 months ago and love it - I go about 3-4 times a week.
     """
     )
+
+    st.title("Personal Life")
+
+    st.markdown(
+        """
+        In my free time, I like to go on hikes (although hikes in Columbus, OH are scarce), hang out with friends, and cook.
+        I started doing Lagree (a form of Pilates) about 6 months ago and love it - I go about 3-4 times a week.
+
+        I currently reside in Columbus, OH with my Fiance. We are getting married next year in Tuscany, Italy
+        and we can't wait! 
+    """
+    )
+
