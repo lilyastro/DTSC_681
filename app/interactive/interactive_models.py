@@ -90,7 +90,7 @@ def i_models():
 
     # Decision Tree Hyperparameters
     dt_max_depth = form.slider('Decision Tree Max Depth', 1, 200, 25)
-    dt_min_samples_split = form.slider('Decision Tree Min Samples Split', 1, 50, 25)
+    dt_min_samples_split = form.slider('Decision Tree Min Samples Split', 2, 50, 25)
     dt_splitter = form.selectbox('Decision Tree Splitter', ['random', 'best'])
 
     # K Nearest Neighbors Hyperparameters
