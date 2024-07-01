@@ -12,9 +12,7 @@ def display_resume_pdf(file):
         pdf = base64.b64encode(f.read()).decode('utf-8')
 
     # Embedding PDF in HTML
-    pdf_fixed = F'<embed src="data:application/pdf;base64,{pdf}" width="700" height="1000" type="application/pdf">'
-
-    st.markdown(pdf_fixed, unsafe_allow_html=True)
+    pdf_fixed = F'<iframe src="data:application/pdf;base64,{pdf}" width="700" height="1000" type="application/pdf"></iframe>'
     # Displaying File
     return st.markdown(pdf_fixed, unsafe_allow_html=True)
 
