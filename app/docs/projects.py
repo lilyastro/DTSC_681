@@ -8,7 +8,7 @@ def projects():
 
     st.markdown(
     """
-        Below is a link to my public project. This was my undergraduate thesis, where I idenfitied the state of Red Giant stars on their 
+        Below is a link to my public project. This was my undergraduate thesis, where I identified the state of Red Giant stars on their 
         evolutionary status- Red Giant or Red Clump. This work is in the process of being published, which I cannot share the paper yet.
     """
     )
