@@ -1,5 +1,5 @@
 import streamlit as st
-from docs.resume import display_resume_pdf
+from docs.resume import display_resume
 from docs.biography import intro
 from docs.projects import projects
 from interactive.interactive_models import i_models
@@ -54,8 +54,8 @@ def intro_page():
     )
 
 def resume():
-    """Function to call display_resume_pdf(file)"""
-    return display_resume_pdf('app/docs/Resume.pdf')
+    """Function to call display_resume()"""
+    return display_resume()
 
 pages = {
     "Introduction": intro_page,

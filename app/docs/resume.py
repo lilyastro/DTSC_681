@@ -2,7 +2,7 @@ import streamlit as st
 import base64
 
 
-def display_resume_pdf(file):
+def display_resume():
     """Function to Display Resume (PDF)
     Args: None
     Returns: Obj: Streamlit Markdown display"""
