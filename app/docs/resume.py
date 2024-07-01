@@ -11,11 +11,10 @@ def display_resume_pdf(file):
     with open(file, "rb") as f:
         pdf = base64.b64encode(f.read()).decode('utf-8')
 
-    #Embed
-    html = (
-        f'<iframe src="data:application/pdf;base64,{pdf}" '
-        'width="800" height="1100" type="application/pdf"></iframe>'
-    )
+    # Embedding PDF in HTML
+    pdf_fixed = F'<embed src="data:application/pdf;base64,{pdf}" width="700" height="1000" type="application/pdf">'
+
+    st.markdown(pdf_fixed, unsafe_allow_html=True)
     # Displaying File
-    return st.markdown(html, unsafe_allow_html=True)
+    return st.markdown(pdf_fixed, unsafe_allow_html=True)
 
