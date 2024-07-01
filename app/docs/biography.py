@@ -33,9 +33,6 @@ def intro():
 
     st.markdown(
         """
-        In my free time, I like to go on hikes (although hikes in Columbus, OH are scarce), hang out with friends, and cook.
-        I started doing Lagree (a form of Pilates) about 6 months ago and love it - I go about 3-4 times a week.
-
         I currently reside in Columbus, OH with my Fiance. We are getting married next year in Tuscany, Italy
         and we can't wait! 
     """
